@@ -85,7 +85,7 @@ local plugins = {
     -- CMP
     {
         'hrsh7th/nvim-cmp',
-        event = 'InsertEnter',
+        event = "InsertEnter",
         dependencies = {
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-buffer',
@@ -134,7 +134,36 @@ local plugins = {
         },
     },
     -- UI Stuff
-    { 'nvim-telescope/telescope.nvim', cmd = 'Telescope', opts = require('stuff.ui.telescope') },
+    { 'nvim-telescope/telescope.nvim', version = false, cmd = 'Telescope', opts = require('stuff.ui.telescope') },
+    {
+        'nvim-neo-tree/neo-tree.nvim',
+        lazy = false,
+        opts = require('stuff.ui.tree'),
+    },
+    'noib3/nvim-cokeline',
+    {
+        'rcarriga/nvim-notify',
+        keys = {
+            {
+                '<leader>un',
+                function()
+                    require('notify').dismiss({ silent = true, pending = true })
+                end,
+                desc = 'Dismiss all Notifications',
+            },
+        },
+        opts = {
+            timeout = 3000,
+            max_height = function()
+                return math.floor(vim.o.lines * 0.75)
+            end,
+            max_width = function()
+                return math.floor(vim.o.columns * 0.75)
+            end,
+        },
+    },
+
+    -- better vim.ui
     {
         'stevearc/dressing.nvim',
         lazy = true,
@@ -148,26 +177,6 @@ local plugins = {
             vim.ui.input = function(...)
                 require('lazy').load({ plugins = { 'dressing.nvim' } })
                 return vim.ui.input(...)
-            end
-        end,
-        config = true,
-    },
-    {
-        'nvim-neo-tree/neo-tree.nvim',
-        lazy = false,
-        opts = require('stuff.ui.tree'),
-    },
-    'noib3/nvim-cokeline',
-    {
-        'rcarriga/nvim-notify',
-        opts = {
-            render = 'compact',
-            stages = 'slide',
-        },
-        init = function()
-            vim.notify = function(...)
-                require('lazy').load({ plugins = { 'nvim-notify' } })
-                return require('notify')(...)
             end
         end,
     },
@@ -251,7 +260,6 @@ local plugins = {
     },
     {
         'windwp/nvim-spectre',
-        -- stylua: ignore
         keys = {
             { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
         },
@@ -279,12 +287,19 @@ local plugins = {
         event = { 'BufReadPost', 'BufNewFile' },
     },
     -- Misc
-    { 'andweeb/presence.nvim', opts = {
-        main_image = 'file',
-    }, event = { 'BufReadPost', 'BufNewFile' } },
-    { 'kyazdani42/nvim-web-devicons', opts = {
-        default = true,
-    } },
+    {
+        'andweeb/presence.nvim',
+        opts = {
+            main_image = 'file',
+        },
+        event = { 'BufReadPost', 'BufNewFile' },
+    },
+    {
+        'kyazdani42/nvim-web-devicons',
+        opts = {
+            default = true,
+        },
+    },
 }
 
 require('lazy').setup(plugins, opts)

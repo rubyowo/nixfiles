@@ -19,6 +19,10 @@
       nix-switch = "doas nixos-rebuild switch --flake ${config.home.homeDirectory}/nixos#selene";
       nix-rollback = "doas nixos-rebuild switch --flake ${config.home.homeDirectory}/nixos#selene --rollback";
       cpf = "wl-copy <";
+      upf = "curl -F'file=@$1' https://files.rubyowo.me";
+      upl = "curl -F'url=@$1' https://files.rubyowo.me";
+      cop = "docker compose up -d";
+      cod = "docker compose down -v";
 
       # Modern unix
       grep = "rg $@";
@@ -34,7 +38,7 @@
     envExtra = ''
       export MCFLY_KEY_SCHEME=vim
       export MCFLY_DISABLE_MENU=TRUE
-      export BAT_THEME="mocha"
+      export BAT_THEME="Catppuccin-mocha"
     '';
 
     initExtra = ''
