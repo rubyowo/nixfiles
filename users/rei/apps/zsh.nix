@@ -11,6 +11,7 @@
 
     dotDir = ".config/zsh";
     history.path = "${config.home.homeDirectory}/.config/zsh/.zsh_history";
+    autocd = true;
 
     # Aliases
     shellAliases = {
@@ -19,8 +20,6 @@
       nix-switch = "doas nixos-rebuild switch --flake ${config.home.homeDirectory}/nixos#selene";
       nix-rollback = "doas nixos-rebuild switch --flake ${config.home.homeDirectory}/nixos#selene --rollback";
       cpf = "wl-copy <";
-      upf = "curl -F'file=@$1' https://files.rubyowo.me";
-      upl = "curl -F'url=@$1' https://files.rubyowo.me";
       cop = "docker compose up -d";
       cod = "docker compose down -v";
 
@@ -42,6 +41,8 @@
     '';
 
     initExtra = ''
+      function upf() { \curl -F file=@$1 https://files.rubyowo.me }
+      function upl() { \curl -F url=@$1 https://files.rubyowo.me }
       eval "$(mcfly init zsh)"
       eval "$(direnv hook zsh)"
     '';
