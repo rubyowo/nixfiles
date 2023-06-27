@@ -9,10 +9,10 @@
     settings = {
       main = {
         include = "${config.xdg.configHome}/foot/mocha.ini";
-        font = "FantasqueSansMono Nerd Font Mono:size=10";
-        font-bold = "FantasqueSansMono Nerd Font Mono:size=10:style=Bold";
-        font-italic = "FantasqueSansMono Nerd Font Mono:size=10:style=Italic";
-        font-bold-italic = "FantasqueSansMono Nerd Font Mono:size=8:style=Bold Italic";
+        font = "FantasqueSansM Nerd Font Mono :size=10:style=Regular";
+        font-bold = "FantasqueSansM Nerd Font Mono:size=10:style=Bold";
+        font-italic = "FantasqueSansM Nerd Font Mono:size=10:style=Italic";
+        font-bold-italic = "FantasqueSansM Nerd Font Mono:size=8:style=Bold Italic";
       };
       mouse.hide-when-typing = "yes";
     };

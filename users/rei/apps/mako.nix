@@ -8,7 +8,7 @@
 
   services.mako = {
     enable = true;
-    font = "FantasqueSansMono Nerd Font 12";
+    font = "FantasqueSansM Nerd Font Mono 12";
     margin = "0,20,20";
     padding = "10";
     borderSize = 2;

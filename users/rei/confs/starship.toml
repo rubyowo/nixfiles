@@ -8,8 +8,8 @@ add_newline = false
 disabled = true
 
 [character]
-success_symbol = " [ﬦ](#f5c2e7 bold)"
-error_symbol = " [ﬦ](#f38ba8)"
+success_symbol = " [󰘧](#f5c2e7 bold)"
+error_symbol = " [󰘧](#f38ba8)"
 
 [hostname]
 disabled = true
@@ -41,13 +41,13 @@ conflicted = "="
 ahead ="${count}"
 behind = "${count}"
 diverged = "${ahead_count}${behind_count}"
-up_to_date = ""
+up_to_date = "󰄬"
 untracked = "?${count}"
-stashed = ""
+stashed = "󰏖"
 modified = "!${count}"
 staged = "+${count}"
 renamed = "»${count}"
-deleted = "${count}"
+deleted = "󰆴${count}"
 
 [package]
 disabled=true

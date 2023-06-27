@@ -26,7 +26,7 @@ in {
       disable-history = false;
       hide-scrollbar = true;
       sidebar-mode = true;
-      font = "FantasqueSansMono Nerd Font 14";
+      font = "FantasqueSansM Nerd Font Mono 14";
       display-drun = "Apps";
       drun-display-format = "{name}";
     };

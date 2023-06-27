@@ -200,7 +200,7 @@
     fontconfig = {
       defaultFonts = {
         monospace = [
-          "FantasqueSansMono Nerd Font"
+          "FantasqueSansM Nerd Font Mono"
           "Noto Color Emoji"
         ];
         sansSerif = ["Noto Sans" "Noto Color Emoji"];

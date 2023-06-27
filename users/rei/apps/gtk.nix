@@ -26,7 +26,7 @@
       name = "Papirus-Dark";
     };
     font = {
-      name = "FantasqueSansMono Nerd Font";
+      name = "FantasqueSansM Nerd Font Mono";
       size = 13;
     };
     gtk3.extraConfig = {

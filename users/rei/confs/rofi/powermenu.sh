@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-lock="  Lock"
-logout="  Log Out"
+lock="󰌾  Lock"
+logout="󰗼  Log Out"
 shutdown="  Shut Down"
 reboot="  Reboot"
 sleep="  Sleep"

@@ -25,16 +25,16 @@
 
         pulseaudio = {
           format = " {icon} ";
-          format-muted = "ﱝ";
-          format-icons = ["奄" "奔" "墳"];
+          format-muted = "󰖁";
+          format-icons = ["" "" ""];
           tooltip = true;
           tooltip-format = "{volume}%";
         };
 
         network = {
-          format-wifi = " ";
-          format-disconnected = "睊";
-          format-ethernet = " ";
+          format-wifi = "󰤨 ";
+          format-disconnected = "󰤭 ";
+          format-ethernet = "󰈀 ";
           tooltip = true;
           tooltip-format = "{signalStrength}%";
         };
@@ -53,9 +53,9 @@
             critical = 15;
           };
           format = "{icon}";
-          format-charging = "";
-          format-plugged = "";
-          format-icons = ["" "" "" "" "" "" "" "" "" "" "" ""];
+          format-charging = "󰂄";
+          format-plugged = "󰂄";
+          format-icons = ["󰂃" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
           tooltip = true;
           tooltip-format = "{capacity}%";
         };
@@ -63,7 +63,7 @@
         "custom/power" = {
           tooltip = false;
           on-click = "powermenu";
-          format = "襤";
+          format = "󰐥";
         };
 
         clock = {

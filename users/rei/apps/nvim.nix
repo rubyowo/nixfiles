@@ -1,8 +1,16 @@
-{ pkgs
-, config
-, ...
-}: {
-  xdg.configFile."nvim".source = ../confs/nvim;
+{
+  pkgs,
+  config,
+  ...
+}: let
+  astronvim = pkgs.fetchFromGitHub {
+    owner = "AstroNvim";
+    repo = "AstroNvim";
+    rev = "main";
+    sha256 = "sha256-Q0foWUqjnWhLKGTq1Xooe+J95BfPL1aodcqaozoQMPQ=";
+  };
+in {
+  xdg.configFile."nvim".source = astronvim;
 
   home.packages = with pkgs; [
     stylua
