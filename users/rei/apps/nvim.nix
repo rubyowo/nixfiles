@@ -2,28 +2,28 @@
   pkgs,
   config,
   ...
-}: let
-  astronvim = pkgs.fetchFromGitHub {
-    owner = "AstroNvim";
-    repo = "AstroNvim";
-    rev = "main";
-    sha256 = "sha256-Q0foWUqjnWhLKGTq1Xooe+J95BfPL1aodcqaozoQMPQ=";
+}: {
+  xdg.configFile."nvim" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos/users/rei/confs/nvim";
+    recursive = true;
   };
-in {
-  xdg.configFile."nvim".source = astronvim;
 
   home.packages = with pkgs; [
+    tree-sitter
+
     stylua
-    nodePackages_latest.prettier
+    prettierd
     black
     alejandra
     shfmt
     # rustfmt is provided by rust-overlay
 
     selene
-    nodePackages_latest.eslint_d
+    nodePackages_latest.eslint
     shellcheck
     statix
+    hadolint
+    proselint
 
     lua-language-server
     nodePackages_latest.typescript-language-server
@@ -32,10 +32,19 @@ in {
     nodePackages_latest.pyright
     nodePackages_latest.vscode-langservers-extracted
     nodePackages_latest.dockerfile-language-server-nodejs
+    nodePackages_latest.graphql
+    nodePackages_latest.graphql-language-service-cli
+    nodePackages.yaml-language-server
+    docker-compose-language-service
     rnix-lsp
+    taplo
+    luaPackages.tl
+    luaPackages.teal-language-server
+    nil
     # rust-analyzer is provided by rust-overlay
 
     gcc
+    gnumake
   ];
 
   programs.neovim = {

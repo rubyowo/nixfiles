@@ -24,7 +24,7 @@
     swaylock-effects
     inputs.nix-gaming.packages.${pkgs.system}.wine-ge
     winetricks
-    lutris
+    # lutris
     zathura
     keepassxc
     (rust-bin.stable.latest.default.override {extensions = ["rust-src"];})
@@ -36,7 +36,7 @@
     gnome.seahorse
 
     inputs.catppuccin-toolbox.packages.${pkgs.system}.puccinier
-    inputs.catppuccin-toolbox.packages.${pkgs.system}.catwalk
+    # inputs.catppuccin-toolbox.packages.${pkgs.system}.catwalk
 
     (pkgs.callPackage ./podman-compose {})
 

@@ -9,7 +9,7 @@
     jsonFile =
       pkgs.runCommand "in.json"
       {
-        nativeBuildInputs = [pkgs.jc];
+        nativeBuildInputs = with pkgs; [jc python311Packages.ruamel-yaml];
       } ''
         jc --yaml < "${f}" > "$out"
       '';

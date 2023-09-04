@@ -13,6 +13,7 @@
         font-bold = "FantasqueSansM Nerd Font Mono:size=10:style=Bold";
         font-italic = "FantasqueSansM Nerd Font Mono:size=10:style=Italic";
         font-bold-italic = "FantasqueSansM Nerd Font Mono:size=8:style=Bold Italic";
+        dpi-aware = "yes";
       };
       mouse.hide-when-typing = "yes";
     };
