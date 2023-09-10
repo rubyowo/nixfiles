@@ -22,7 +22,7 @@
     nodePackages_latest.eslint
     shellcheck
     statix
-    hadolint
+    # hadolint
     proselint
 
     lua-language-server
@@ -41,6 +41,7 @@
     luaPackages.tl
     luaPackages.teal-language-server
     nil
+    ruff-lsp
     # rust-analyzer is provided by rust-overlay
 
     gcc

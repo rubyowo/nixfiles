@@ -35,8 +35,11 @@
     virtmanager
     gnome.seahorse
 
+    # i am coping
+    nodejs_latest
+
     inputs.catppuccin-toolbox.packages.${pkgs.system}.puccinier
-    # inputs.catppuccin-toolbox.packages.${pkgs.system}.catwalk
+    inputs.catppuccin-toolbox.packages.${pkgs.system}.catwalk
 
     (pkgs.callPackage ./podman-compose {})
 
