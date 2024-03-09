@@ -16,6 +16,7 @@
     black
     alejandra
     shfmt
+    isort
     # rustfmt is provided by rust-overlay
 
     selene

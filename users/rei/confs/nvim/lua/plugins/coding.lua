@@ -1,11 +1,11 @@
 return {
   -- disable mason from auto installing because we're on nix
-  { "jay-babu/mason-nvim-dap.nvim", opts = { automatic_installation = false } },
-  {"williamboman/mason-lspconfig.nvim", enabled = false},
+  { "jay-babu/mason-nvim-dap.nvim",      opts = { automatic_installation = false } },
+  { "williamboman/mason-lspconfig.nvim", enabled = false },
 
-  -- add nix to null_ls
+  -- add nix to none_ls & conform
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     opts = function(_, opts)
       local nls = require("null-ls")
       opts.sources = opts.sources or {}
@@ -14,6 +14,16 @@ return {
         nls.builtins.formatting.alejandra,
       })
     end,
+  },
+  {
+    'stevearc/conform.nvim',
+    -- opts = {
+    --   formatters_by_ft = {
+    --     python = {"isort", "black"},
+    --     nix = {"alejandra"}
+    --   },
+    -- },
+    enabled = false,
   },
 
   -- better incrementing

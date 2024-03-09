@@ -27,7 +27,7 @@
       grep = "rg $@";
       find = "fd $@";
       df = "duf $@";
-      ls = "exa --git --icons $@";
+      ls = "eza --git --icons $@";
       cat = "bat $@";
       dig = "dog $@";
       sudo = "doas $@";

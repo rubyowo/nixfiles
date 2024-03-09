@@ -23,8 +23,10 @@
     cava
     swaylock-effects
     inputs.nix-gaming.packages.${pkgs.system}.wine-ge
+    inputs.nix-gaming.packages.${pkgs.system}.proton-ge
     winetricks
     # lutris
+    # bottles
     zathura
     keepassxc
     (rust-bin.stable.latest.default.override {extensions = ["rust-src"];})
@@ -32,23 +34,26 @@
     direnv
     mpd-mpris
     syncthing
-    virtmanager
+    virt-manager
     gnome.seahorse
+    libreoffice
 
     # i am coping
     nodejs_latest
 
+    docker-compose
+    docker-buildx
+
     inputs.catppuccin-toolbox.packages.${pkgs.system}.puccinier
     inputs.catppuccin-toolbox.packages.${pkgs.system}.catwalk
-
-    (pkgs.callPackage ./podman-compose {})
+    inputs.catppuccin-toolbox.packages.${pkgs.system}.whiskers
 
     # Modern unix
     ripgrep
     mcfly
     fd
     duf
-    exa
+    eza
     bat
     jq
     tldr

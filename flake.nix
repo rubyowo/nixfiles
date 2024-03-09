@@ -15,6 +15,7 @@
     hyprpicker.url = "github:hyprwm/hyprpicker";
 
     nix-gaming.url = "github:fufexan/nix-gaming";
+    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 
     catppuccin-toolbox.url = "github:catppuccin/toolbox";
 
@@ -28,11 +29,13 @@
     rust-overlay,
     hyprland,
     sops-nix,
+    nixpkgs-wayland,
     ...
   } @ inputs: let
     overlays = {pkgs, ...}: {
       nixpkgs.overlays = with inputs; [
         rust-overlay.overlays.default
+        nixpkgs-wayland.overlay
       ];
     };
 

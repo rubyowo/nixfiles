@@ -36,6 +36,7 @@ in {
     pamixer
     wl-clipboard
     wtype
+    waypipe
     imv
     mpv
     screenshotScript

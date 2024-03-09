@@ -29,4 +29,7 @@
       tag = {gpgsign = true;};
     };
   };
+  home.packages = with pkgs; [
+    git-lfs 
+  ];
 }

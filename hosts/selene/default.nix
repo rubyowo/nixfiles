@@ -19,6 +19,7 @@
     kernel.sysctl = {
       "net.ipv4.ip_forward" = true;
       "net.ipv6.conf.all.forwarding" = true;
+      "net.ipv4.ip_unprivileged_port_start" = 0;
     };
   };
 
@@ -39,8 +40,8 @@
       # Nix automatically detects files in the store that have identical contents, and replaces them with hard links to a single copy.
       auto-optimise-store = true;
 
-      substituters = ["https://hyprland.cachix.org" "https://nix-community.cachix.org" "https://nix-gaming.cachix.org"];
-      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
+      substituters = ["https://hyprland.cachix.org" "https://nix-community.cachix.org" "https://nix-gaming.cachix.org" "https://catppuccin.cachix.org"];
+      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=" "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4=" "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA=" "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="];
 
       #      use-xdg-base-directories = true;
     };
@@ -50,8 +51,12 @@
     networkmanager.enable = true;
 
     hostName = "selene";
-    nameservers = ["127.0.0.1" "1.1.1.1"];
+    #    nameservers = ["127.0.0.1"];
+    nameservers = ["192.168.0.1"];
   };
+
+  # what the FUCK. nixos/nixpkgs#180175
+  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
   # Set your time zone.
   time.timeZone = "Asia/Dubai";
@@ -87,7 +92,11 @@
   security.sudo.enable = false;
 
   # OpenSSH
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings.X11Forwarding = true;
+  };
+
   programs.ssh = {
     startAgent = true;
     extraConfig = ''
@@ -95,6 +104,60 @@
     '';
   };
 
+  # Tailscale
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "server";
+  };
+
+  services.samba-wsdd = {
+    # make shares visible for Windows clients
+    enable = true;
+    openFirewall = true;
+  };
+  services.samba = {
+    enable = true;
+    securityType = "user";
+    openFirewall = true;
+    extraConfig = ''
+      workgroup = WORKGROUP
+      server string = selene
+      netbios name = selene
+      security = user
+      #use sendfile = yes
+      #max protocol = smb2
+      # note: localhost is the ipv6 localhost ::1
+      hosts allow = 192.168. 127. localhost
+      guest account = rei
+      map to guest = bad user
+      server min protocol = NT1
+      ntlm auth = true
+    '';
+    shares = {
+      games = {
+        path = "/home/rei/network/roms";
+        browseable = "yes";
+        "read only" = "no";
+        "guest ok" = "yes";
+        "browsable" = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "rei";
+        "force group" = "users";
+      };
+      public = {
+        path = "/export";
+        browseable = "yes";
+        "read only" = "no";
+        "guest ok" = "yes";
+        "browsable" = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "rei";
+        "force group" = "users";
+      };
+    };
+  };
   # GnuPG
   programs.gnupg.agent = {
     enable = true;
@@ -125,20 +188,24 @@
   virtualisation.docker = {
     enable = true;
     daemon.settings = {
-      fixed-cidr-v6 = "fc00:6:0::1/64";
-      ipv6 = true;
+      experimental = true;
+      ip6tables = true;
     };
   };
 
   # Podman
   virtualisation.podman = {
-    enable = true;
-    # dockerSocket.enable = true;
+    enable = false;
+    dockerSocket.enable = false;
+    dockerCompat = true;
     defaultNetwork.settings = {
-      # dns_enabled = true;
+      dns_enabled = true;
       ipv6_enabled = true;
     };
   };
+
+  # OCI Containers
+  virtualisation.oci-containers.backend = "podman";
 
   # QEMU
   virtualisation.libvirtd.enable = true;
@@ -163,7 +230,7 @@
   services.avahi = {
     enable = true;
     openFirewall = true;
-    nssmdns = true;
+    nssmdns4 = true;
   };
 
   hardware.printers = let
@@ -189,7 +256,7 @@
 
   # Fonts
   fonts = {
-    fonts = with pkgs; [
+    packages = with pkgs; [
       twemoji-color-font
       noto-fonts
       noto-fonts-cjk
