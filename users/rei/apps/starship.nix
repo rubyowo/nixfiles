@@ -5,7 +5,7 @@
   ...
 }: {
   programs.starship = {
-    enable = true;
+    enable = false;
     settings = lib.importTOML ../confs/starship.toml;
   };
 }
