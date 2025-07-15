@@ -7,7 +7,7 @@
   programs.git = {
     enable = true;
 
-    userEmail = "perhaps-you-know@what-is.ml";
+    userEmail = "rubyowo284@pm.me";
     userName = "rubyowo";
 
     signing = {
@@ -30,6 +30,6 @@
     };
   };
   home.packages = with pkgs; [
-    git-lfs 
+    git-lfs
   ];
 }

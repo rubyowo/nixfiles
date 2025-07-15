@@ -7,19 +7,23 @@
 
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    rust-overlay.url = "github:oxalica/rust-overlay";
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprpaper.url = "github:hyprwm/hyprpaper";
-    hyprpicker.url = "github:hyprwm/hyprpicker";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    nix-gaming.url = "github:fufexan/nix-gaming";
-    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    catppuccin-toolbox.url = "github:catppuccin/toolbox";
-
-    sops-nix.url = "github:Mic92/sops-nix";
+    auto-cpufreq = {
+      url = "github:AdnanHodzic/auto-cpufreq";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -27,15 +31,13 @@
     nixpkgs,
     home-manager,
     rust-overlay,
-    hyprland,
     sops-nix,
-    nixpkgs-wayland,
+    auto-cpufreq,
     ...
   } @ inputs: let
     overlays = {pkgs, ...}: {
       nixpkgs.overlays = with inputs; [
         rust-overlay.overlays.default
-        nixpkgs-wayland.overlay
       ];
     };
 
@@ -61,9 +63,8 @@
           home-manager.useUserPackages = true;
         }
         overlays
-        hyprland.nixosModules.default
-        {programs.hyprland.enable = true;}
         sops-nix.nixosModules.sops
+        auto-cpufreq.nixosModules.default
       ];
       specialArgs = {inherit system inputs;};
     };

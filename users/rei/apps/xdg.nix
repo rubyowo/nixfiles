@@ -25,7 +25,6 @@
 
     mimeApps = {
       enable = true;
-      defaultApplications = {"text/html" = ["firefox.desktop"];};
     };
 
     stateHome = "${config.home.homeDirectory}/.local/state";

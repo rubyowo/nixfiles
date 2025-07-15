@@ -1,13 +1,14 @@
 # ZSH settings
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }: {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
 
     dotDir = ".config/zsh";
     history.path = "${config.home.homeDirectory}/.config/zsh/.zsh_history";
@@ -16,12 +17,11 @@
     # Aliases
     shellAliases = {
       lg = "lazygit";
-      nix-clean = "doas nix-collect-garbage";
-      nix-switch = "doas nixos-rebuild switch --flake ${config.home.homeDirectory}/nixos#selene";
-      nix-rollback = "doas nixos-rebuild switch --flake ${config.home.homeDirectory}/nixos#selene --rollback";
-      cpf = "wl-copy <";
+      nix-clean = "sudo nix-collect-garbage";
+      nix-switch = "sudo nixos-rebuild switch --flake ${config.home.homeDirectory}/nixos#selene";
+      nix-rollback = "sudo nixos-rebuild switch --flake ${config.home.homeDirectory}/nixos#selene --rollback";
       cop = "docker compose up -d";
-      cod = "docker compose down -v";
+      cod = "docker compose down";
 
       # Modern unix
       grep = "rg $@";
@@ -30,27 +30,17 @@
       ls = "eza --git --icons $@";
       cat = "bat $@";
       dig = "dog $@";
-      sudo = "doas $@";
       curl = "curlie $@";
     };
 
     envExtra = ''
       export MCFLY_KEY_SCHEME=vim
       export MCFLY_DISABLE_MENU=TRUE
-      export BAT_THEME="Catppuccin-mocha"
     '';
 
     initExtra = ''
-      function upf() { \curl -F file=@$1 https://files.rubyowo.me }
-      function upl() { \curl -F url=@$1 https://files.rubyowo.me }
       eval "$(mcfly init zsh)"
       eval "$(direnv hook zsh)"
-    '';
-
-    profileExtra = ''
-      if [ "$(tty)" = "/dev/tty1" ]; then;
-          exec Hyprland
-      fi
     '';
 
     plugins = [

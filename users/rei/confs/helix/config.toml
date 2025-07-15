@@ -1,0 +1,55 @@
+theme = "catppuccin_mocha"
+
+[editor]
+line-number = "relative"
+cursorline = true
+color-modes = true
+bufferline = "multiple"
+clipboard-provider = "termcode"
+default-yank-register = "+"
+mouse = true
+auto-format = true
+end-of-line-diagnostics = "hint"
+true-color = true
+
+[editor.soft-wrap]
+enable = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+git-ignore = false
+
+[editor.lsp]
+display-inlay-hints = true
+
+[editor.auto-save]
+after-delay.enable = true
+
+[editor.indent-guides]
+render = true
+
+[editor.statusline]
+center = ["version-control"]
+
+[keys.normal]
+C-q = ":q"
+# C-w = ":x"
+S-l = ":buffer-next"
+S-h = ":buffer-previous"
+C-g = [
+    ":write-all",
+    ":new",
+    ":insert-output lazygit",
+    ":buffer-close!",
+    ":redraw",
+    ":reload-all"
+]
+
+[keys.normal.space]
+w = ":w!"
+q = ":buffer-close"
