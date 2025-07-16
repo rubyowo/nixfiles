@@ -57,7 +57,7 @@
   networking = {
     hostName = "selene";
     #hostId = "301af4f1";
-    nameservers = ["127.0.0.1"];
+    # nameservers = ["127.0.0.1"];
   };
 
   services.dnsmasq = {
@@ -71,6 +71,12 @@
       # server = ["1.1.1.1"]
       address = ["/whoison.top/192.168.96.23"];
     };
+  };
+
+  services.btrfs.autoScrub = {
+    enable = true;
+    interval = "monthly";
+    fileSystems = ["/"];
   };
 
   # ZFS
